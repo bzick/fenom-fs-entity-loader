@@ -5,8 +5,6 @@ namespace Fenom;
 
 trait FSEntityLoaderTrait
 {
-    use EntityLoaderTrait;
-
     private $_plugin_dirs = [];
     private $_loaded_tags = [];
     private $_loaded_mods = [];
