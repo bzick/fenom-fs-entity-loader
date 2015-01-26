@@ -27,5 +27,6 @@ class SimpleLoaderTest extends \PHPUnit_Framework_TestCase {
 }
 
 class TemplaterFSLoader extends \Fenom {
+    use EntityLoaderTrait;
     use FSEntityLoaderTrait;
 }
