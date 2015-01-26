@@ -1,0 +1,25 @@
+{
+    "name": "fenom/fs-entity-loader",
+    "type": "library",
+    "description": "Fenom extension: load tag and modifier from FS",
+    "keywords": ["fenom", "loader", "tag"],
+    "license": "BSD-3",
+    "authors": [
+        {
+            "name": "Ivan Shalganov",
+            "email": "a.cobest@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.8",
+        "fenom/entity-loader": "1.*"
+    },
+    "require-dev": {
+        "fenom/fenom": "2.*",
+        "phpunit/phpunit": "*",
+        "satooshi/php-coveralls": "dev-master"
+    },
+    "autoload": {
+        "psr-0": { "Fenom\\": "src/" }
+    }
+}
