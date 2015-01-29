@@ -3,6 +3,17 @@ Loader tags and modifiers for Fenom from FS
 
 Just like Smarty.
 
+# Install
+
+Use composer:
+```json
+{  
+    "require": {
+        "fenom/fs-entity-loader": "dev-master"
+    }
+}
+```
+
 # Setup
 
 Add traits into your Fenom class:
