@@ -9,7 +9,7 @@ Use composer:
 ```json
 {  
     "require": {
-        "fenom/fs-entity-loader": "dev-master"
+        "fenom/fs-entity-loader": "1.*"
     }
 }
 ```
