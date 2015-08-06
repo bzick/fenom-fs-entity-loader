@@ -8,6 +8,7 @@ trait FSEntityLoaderTrait
     private $_plugin_dirs = [];
     private $_loaded_tags = [];
     private $_loaded_mods = [];
+    private $_used_tags   = [];
 
     private $_modifier_format = 'fenom_modifier_%s';
     private $_tag_formats = [
@@ -74,16 +75,22 @@ trait FSEntityLoaderTrait
     private function _tagLoader($tag, Template $template)
     {
         if (isset($this->_loaded_tags[$tag])) {
-            if ($template) {
+            if ($template && !array_key_exists($tag, $this->_used_tags)) {
                 $name = $this->_loaded_tags[$tag]["name"];
                 $path = $this->_loaded_tags[$tag]["path"];
                 $template->before("if (!is_callable('$name')) {\n\tinclude_once '$path';\n}\n");
+                $this->_used_tags[$tag] = $this->_loaded_tags[$tag];
             }
             return $this->_loaded_tags[$tag];
         }
         foreach ($this->_plugin_dirs as $dir) {
             foreach ($this->_tag_formats as $prefix => $format) {
                 $name = sprintf($format, $tag);
+
+                if (array_key_exists($tag, $this->_loaded_tags)) {
+                    continue;
+                }
+
                 $path = $dir.DIRECTORY_SEPARATOR.$prefix.'.'.$tag.'.php';
                 if (is_file($path) && is_readable($path)) {
                     $c = require_once($path);
@@ -142,6 +149,7 @@ trait FSEntityLoaderTrait
 
                 if ($template) {
                     $template->before("if (!is_callable('$name')) {\n\tinclude_once '$path';\n}\n");
+                    $this->_used_tags[$tag] = $info;
                 }
 
                 $this->_loaded_tags[$tag] = $info;
